@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Countdown Timer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <style>
         body {
             margin: 0;
@@ -21,6 +21,7 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            padding: 2vw;
         }
         .timer-title {
             color: #ff69b4;
@@ -29,10 +30,13 @@
             letter-spacing: 3px;
             text-shadow: 0 2px 8px #ffb6c1;
             font-family: 'Pacifico', cursive, 'Segoe UI', Arial, sans-serif;
+            text-align: center;
         }
         .timer-boxes {
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         .timer-box {
             background: #fff0fa;
@@ -72,12 +76,12 @@
             text-shadow: 0 2px 8px #ffb6c1;
             animation: pop 0.7s;
             font-family: 'Pacifico', cursive, 'Segoe UI', Arial, sans-serif;
+            text-align: center;
         }
         @keyframes pop {
             0% { transform: scale(0.7); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
-        /* Butterfly canvas should be behind everything */
         #butterfly-canvas {
             position: fixed;
             left: 0;
@@ -86,15 +90,55 @@
             height: 100vh;
             z-index: 0;
             pointer-events: none;
-
             background: linear-gradient(120deg, #f8e1f4 0%, #b3e0ff 100%);
-            
-           
             transform-origin: center;
             animation: pulse 20s infinite alternate;
         }
+
+        /* Responsive styles for mobile */
+        @media (max-width: 600px) {
+            .timer-title {
+                font-size: 1.5rem;
+                margin-bottom: 1.2rem;
+            }
+            .timer-boxes {
+                gap: 0.5rem;
+            }
+            .timer-box {
+                min-width: 60px;
+                padding: 0.6rem 0.5rem;
+            }
+            .timer-value {
+                font-size: 2rem;
+            }
+            .timer-label {
+                font-size: 0.85rem;
+            }
+            .timer-end-message {
+                font-size: 1.2rem;
+                margin-top: 1.2rem;
+            }
+            .timer-container {
+                padding: 1vw;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .timer-title {
+                font-size: 1.1rem;
+            }
+            .timer-box {
+                min-width: 40px;
+                padding: 0.4rem 0.2rem;
+            }
+            .timer-value {
+                font-size: 1.2rem;
+            }
+            .timer-label {
+                font-size: 0.7rem;
+            }
+        }
     </style>
-    <!-- Google Fonts for Pacifico -->
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -129,8 +173,13 @@
         const ctx = canvas.getContext('2d');
         let width = window.innerWidth;
         let height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+        resizeCanvas();
 
         function randomColor() {
             const colors = [
@@ -257,10 +306,7 @@
         }
 
         window.addEventListener('resize', () => {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
+            resizeCanvas();
             createButterflies();
         });
 
