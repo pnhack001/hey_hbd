@@ -315,13 +315,14 @@
 
         // Countdown timer logic
         function getTargetDateIST() {
-            // 7 May, 12:00 AM IST
-            const target = new Date();
-            target.setUTCFullYear(new Date().getUTCFullYear());
-            target.setUTCMonth(4); // May is 4 (0-based)
-            target.setUTCDate(7);
-            target.setUTCHours(18, 30, 0, 0); // 12:00 AM IST = 18:30 (previous day) UTC
-            return target;
+            // 7 May, 00:00 IST
+            const now = new Date();
+            const year = (now.getUTCMonth() > 4 || (now.getUTCMonth() === 4 && now.getUTCDate() > 7))
+                ? now.getUTCFullYear() + 1
+                : now.getUTCFullYear();
+            // May is month 4 (0-based)
+            // 7 May 00:00 IST = 6 May 18:30 UTC
+            return new Date(Date.UTC(year, 4, 6, 18, 30, 0));
         }
         const targetDate = getTargetDateIST();
 
