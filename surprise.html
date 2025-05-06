@@ -1,8 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        html, body {
+            height: 100%;
+            overflow: auto !important;
+        }
+        body {
+            overflow-y: auto !important;
+        }
+        .matrix-bg {
+            pointer-events: none;
+        }
+    </style>
     <meta charset="UTF-8">
-    <title>Happy Birthday - Hacker Style</title>
+    <title>Happy Birthday </title>
     <!-- Google Fonts: JetBrains Mono for a modern hacker vibe -->
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
@@ -13,7 +25,7 @@
             font-family: 'JetBrains Mono', 'Fira Mono', 'Consolas', monospace;
             min-height: 100vh;
             margin: 0;
-            overflow-y: auto;
+            overflow: hidden;
         }
         .matrix-bg {
             position: fixed;
@@ -172,17 +184,34 @@
         <div class="panel">
             <div class="panel-title">A Personal Note</div>
             <div>
-                <button id="personalNoteBtn" style="background:#ffea00;color:#101820;font-family:'JetBrains Mono',monospace;border:none;padding:8px 18px;border-radius:6px;cursor:pointer;font-weight:bold;box-shadow:0 0 8px #ffea00a0;">Show Personal Note</button>
+            <button id="show-note-btn" style="background:#101820; color:#ffea00; border:1.5px solid #ffea00; border-radius:6px; padding:8px 18px; font-family:'JetBrains Mono',monospace; font-size:1em; cursor:pointer; margin-bottom:10px;">
+                Show Personal Note
+            </button>
+            <div id="personal-note" style="display:none;">
+                <pre style="white-space:pre-wrap; font-family:'JetBrains Mono',monospace; background:none; color:#ffea00; border:none; box-shadow:none; padding:0; margin:0;">
+On this special day, I just want to say:
+Wishing you a year filled with happiness, success, and all the adventures your heart desires.
+May your year be filled with joy, laughter, and endless possibilities.
+Keep hike your way to greatness!
+and 8269938961...!
+                </pre>
             </div>
-</div>
+            <script>
+                document.getElementById('show-note-btn').onclick = function() {
+                    var note = document.getElementById('personal-note');
+                    if (note.style.display === 'none') {
+                        note.style.display = 'block';
+                        this.textContent = 'Hide Personal Note';
+                    } else {
+                        note.style.display = 'none';
+                        this.textContent = 'Show Personal Note';
+                    }
+                };
+            </script>
+        </div>
 
         <!-- Simulated Terminal Panel: Your Own Words -->
-        <div class="terminal">
-            <span style="color:#ffea00;">$</span> echo "Life is a terminal, and you are the command."<br>
-            <span style="color:#ffea00;">$</span> echo "Every line you write, every bug you fix, every smile you share—"<br>
-            <span style="color:#ffea00;">$</span> echo "it all compiles into something beautiful."<br>
-            <span style="color:#ffea00;">$</span> echo "Keep coding, keep dreaming, and never stop exploring."
-        </div>
+        
 
         <p style="text-align:right;">
             <span style="color:#ff0040;">-- from PJ </span>
@@ -246,81 +275,3 @@
     </script>
 </body>
 </html>
-        <script>
-            // Personal Note Modal & Typewriter
-            document.getElementById('personalNoteBtn').onclick = function() {
-                const note = `On this special day, I just want to say:
-    Brilliance and kindness light up every space you enter.
-    May your year be filled with joy, laughter, and endless possibilities.
-    Keep hike your way to greatness!`;
-    
-                // Create a modal overlay for the note
-                let modal = document.createElement('div');
-                modal.style.position = 'fixed';
-                modal.style.top = 0;
-                modal.style.left = 0;
-                modal.style.width = '100vw';
-                modal.style.height = '100vh';
-                modal.style.background = 'rgba(16,24,32,0.92)';
-                modal.style.display = 'flex';
-                modal.style.alignItems = 'center';
-                modal.style.justifyContent = 'center';
-                modal.style.zIndex = 9999;
-    
-                let modalContent = document.createElement('div');
-                modalContent.style.background = '#101820';
-                modalContent.style.color = '#ffea00';
-                modalContent.style.fontFamily = "'JetBrains Mono', monospace";
-                modalContent.style.padding = '32px 22px 24px 22px';
-                modalContent.style.borderRadius = '10px';
-                modalContent.style.boxShadow = '0 0 24px #ffea00a0';
-                modalContent.style.maxWidth = '420px';
-                modalContent.style.width = '90vw';
-                modalContent.style.position = 'relative';
-                modalContent.style.fontSize = '1.1em';
-    
-                let closeBtn = document.createElement('button');
-                closeBtn.textContent = '×';
-                closeBtn.style.position = 'absolute';
-                closeBtn.style.top = '10px';
-                closeBtn.style.right = '16px';
-                closeBtn.style.background = 'none';
-                closeBtn.style.border = 'none';
-                closeBtn.style.color = '#ffea00';
-                closeBtn.style.fontSize = '1.6em';
-                closeBtn.style.cursor = 'pointer';
-                closeBtn.style.fontWeight = 'bold';
-    
-                closeBtn.onclick = function() {
-                    document.body.removeChild(modal);
-                };
-    
-                let noteDiv = document.createElement('div');
-                noteDiv.className = 'typewriter';
-                noteDiv.style.whiteSpace = 'pre-line';
-                noteDiv.style.borderRight = '.15em solid #ffea00';
-                noteDiv.style.overflow = 'hidden';
-                noteDiv.style.animation = 'blink-caret .75s step-end infinite';
-    
-                modalContent.appendChild(closeBtn);
-                modalContent.appendChild(noteDiv);
-                modal.appendChild(modalContent);
-                document.body.appendChild(modal);
-    
-                // Typewriter effect in modal
-                let i = 0, text = '';
-                function typeWriter() {
-                    text = note.slice(0, i++);
-                    noteDiv.textContent = text;
-                    if (text === note) {
-                        noteDiv.style.borderRight = 'none';
-                        return;
-                    }
-                    setTimeout(typeWriter, 35);
-                }
-                typeWriter();
-            };
-    
-            // Matrix background effect
-            const canvas = document.querySelector('.matrix-bg');
-            const ctx = canvas.getContext('2d');
