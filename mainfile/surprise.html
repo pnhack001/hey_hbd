@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        html, body {
+            height: 100%;
+            overflow: auto !important;
+        }
+        body {
+            overflow-y: auto !important;
+        }
+        .matrix-bg {
+            pointer-events: none;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Happy Birthday </title>
+    <!-- Google Fonts: JetBrains Mono for a modern hacker vibe -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #0f2027;
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            color: #00ff41;
+            font-family: 'JetBrains Mono', 'Fira Mono', 'Consolas', monospace;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .matrix-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .birthday-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 80px auto;
+            background: rgba(10, 20, 30, 0.85);
+            border: 2px solid #00ff41;
+            border-radius: 12px;
+            box-shadow: 0 0 30px #00ff41a0;
+            padding: 40px 30px 30px 30px;
+            text-align: center;
+        }
+        .glow {
+            color: #ffea00;
+            text-shadow: 0 0 10px #ffea00, 0 0 20px #ffea00a0;
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .hacker-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #00ff41;
+            box-shadow: 0 0 20px #00ff41a0;
+            margin-bottom: 18px;
+            object-fit: cover;
+            background: #111;
+        }
+        .typewriter {
+            display: inline-block;
+            overflow: hidden;
+            border-right: .15em solid #ffea00;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .08em;
+            animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+            font-size: 1.1em;
+            color: #ffea00;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #ffea00; }
+        }
+        .binary-heart {
+            display: inline-block;
+            margin: 18px auto 0 auto;
+            font-size: 1.6em;
+            font-family: 'JetBrains Mono', monospace;
+            color: #ff0040;
+            animation: pulse 1.2s infinite;
+            letter-spacing: 0.1em;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1);}
+            50% { transform: scale(1.15);}
+            100% { transform: scale(1);}
+        }
+        p {
+            font-size: 1.1em;
+            margin: 18px 0;
+        }
+        .panel {
+            background: #101820;
+            border: 1.5px solid #00ff41;
+            border-radius: 8px;
+            box-shadow: 0 0 12px #00ff41a0;
+            padding: 18px 16px 12px 16px;
+            margin: 24px 0 12px 0;
+            text-align: left;
+            font-size: 1em;
+        }
+        .panel-title {
+            color: #ffea00;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            font-weight: bold;
+            letter-spacing: 0.03em;
+        }
+        .terminal {
+            background: #181c1f;
+            color: #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+            border-radius: 6px;
+            padding: 12px 10px;
+            margin-top: 10px;
+            font-size: 0.98em;
+            box-shadow: 0 0 8px #00ff41a0;
+            border-left: 3px solid #ffea00;
+        }
+        span {
+            font-weight: bold;
+        }
+        @media (max-width: 600px) {
+            .birthday-content {
+                padding: 20px 8px;
+            }
+            .glow {
+                font-size: 1.2em;
+            }
+            .hacker-img {
+                width: 80px;
+                height: 80px;
+            }
+            .typewriter {
+                font-size: 0.95em;
+            }
+            .binary-heart {
+                font-size: 1.1em;
+            }
+            .panel {
+                padding: 10px 5px 8px 5px;
+                font-size: 0.95em;
+            }
+            .terminal {
+                font-size: 0.92em;
+                padding: 8px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas class="matrix-bg"></canvas>
+    <div class="birthday-content">
+        <!-- Replace src with your own image if you want -->
+        <img class="hacker-img" src="https://i.imgur.com/6oK6wQF.png" alt="Hacker Avatar">
+        <h2 class="glow">🎂 Happy Birthday, <span style="color:#ffea00;">Nandini</span>! 🎂</h2>
+        <div class="typewriter" id="typewriter"></div>
+       
+        <p>
+            <span style="color:#00ff41;">Access Level:</span> <span style="color:#ffea00;">TOP SECRET</span><br>
+            <span style="color:#00ff41;">Mission:</span> Make your day unforgettable.<br>
+            <span style="color:#00ff41;">Status:</span> <span style="color:#ffea00;">SUCCESS</span>
+        </p>
+        <p>
+            May your code always compile,<br>
+            Your systems stay secure,<br>
+            And your heart be <span style="color:#ff0040;">unhackable</span>!<br>
+            <span style="color:#ffea00;">Have an epic year ahead!</span>
+        </p>
+
+        <!-- Simulated Hacking Panel: Personal Note -->
+        <div class="panel">
+            <div class="panel-title">A Personal Note</div>
+            <div>
+            <button id="show-note-btn" style="background:#101820; color:#ffea00; border:1.5px solid #ffea00; border-radius:6px; padding:8px 18px; font-family:'JetBrains Mono',monospace; font-size:1em; cursor:pointer; margin-bottom:10px;">
+                Show Personal Note
+            </button>
+            <div id="personal-note" style="display:none;">
+                <pre style="white-space:pre-wrap; font-family:'JetBrains Mono',monospace; background:none; color:#ffea00; border:none; box-shadow:none; padding:0; margin:0;">
+On this special day, I just want to say:
+Wishing you a year filled with happiness, success, and all the adventures your heart desires.
+May your year be filled with joy, laughter, and endless possibilities.
+Keep hike your way to greatness!
+and 8269938961...!
+                </pre>
+            </div>
+            <script>
+                document.getElementById('show-note-btn').onclick = function() {
+                    var note = document.getElementById('personal-note');
+                    if (note.style.display === 'none') {
+                        note.style.display = 'block';
+                        this.textContent = 'Hide Personal Note';
+                    } else {
+                        note.style.display = 'none';
+                        this.textContent = 'Show Personal Note';
+                    }
+                };
+            </script>
+        </div>
+
+        <!-- Simulated Terminal Panel: Your Own Words -->
+        
+
+        <p style="text-align:right;">
+            <span style="color:#ff0040;">-- from PJ </span>
+        </p>
+    </div>
+    <script>
+        // Matrix background effect
+        const canvas = document.querySelector('.matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+
+        const letters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&@';
+        const fontSize = 18;
+        const columns = Math.floor(width / fontSize);
+        const drops = Array(columns).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(15,32,39,0.15)';
+            ctx.fillRect(0, 0, width, height);
+
+            ctx.font = fontSize + "px 'JetBrains Mono', monospace";
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillStyle = '#00ff41';
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 50);
+
+        window.addEventListener('resize', () => {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        });
+
+        // Typewriter effect for suspenseful hacker message
+        const hackerMsg = "Initializing birthday protocol...<br>Bypassing firewalls...<br>Decrypting wishes...<br><span style='color:#00ff41;'>Access Granted!</span><br><span style='color:#ffea00;'>Happy Birthday, Nandini!</span>";
+        const typewriter = document.getElementById('typewriter');
+        let i = 0, isTag = false, text = '';
+
+        function typeWriterEffect() {
+            text = hackerMsg.slice(0, i++);
+            typewriter.innerHTML = text;
+            if (text === hackerMsg) return;
+            let char = text.slice(-1);
+            if( char === '<' ) isTag = true;
+            if( char === '>' ) isTag = false;
+            setTimeout(typeWriterEffect, isTag ? 0 : 45);
+        }
+        typeWriterEffect();
+        
+    </script>
+</body>
+</html>
